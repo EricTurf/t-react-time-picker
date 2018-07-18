@@ -6,31 +6,31 @@ import { ItemList } from '../item-list';
 
 import { PeriodButtons } from '../period-buttons';
 
+import formatHour from '../../utils/format-hour';
+
+const hourRegex = /([0-9]{1,2}(?=:))/g;
+const minuteRegex = /([0-9]{2}(?!:))/g;
+const periodRegex = /([a|p]\.[m])/g;
+
 export default class Time extends React.Component {
   static defaultProps = { step: 5 };
 
   handleMinuteChange = minute => {
-    const { value, onSelect } = this.props;
+    const { value, onTimeChange } = this.props;
 
-    const [hour, min] = value.split(':');
-    const period = min.split(' ')[1];
-
-    onSelect(`${hour}:${minute} ${period}`);
+    onTimeChange(value.replace(minuteRegex, minute));
   };
 
   handleHourChange = hour => {
-    const { value, onSelect } = this.props;
+    const { value, onTimeChange } = this.props;
 
-    const [hr, x] = value.split(':');
-    const [minute, period] = x.split(' ');
-
-    onSelect(`${hour < 10 ? hour.replace('0', '') : hour}:${minute} ${period}`);
+    onTimeChange(value.replace(hourRegex, formatHour(hour)));
   };
 
   handlePeriodChange = period => {
-    const { value, onSelect } = this.props;
+    const { value, onTimeChange } = this.props;
 
-    onSelect(`${value.split(' ')[0]} ${period}`);
+    onTimeChange(value.replace(periodRegex, period));
   };
 
   buildTimes = () => {
@@ -60,9 +60,12 @@ export default class Time extends React.Component {
   };
 
   render() {
+    const { value } = this.props;
     const { hours, minutes } = this.buildTimes();
 
-    const [hour, minute] = this.props.value.split(' ')[0].split(':');
+    const minute = value.match(minuteRegex)[0];
+    const hour = value.match(hourRegex)[0];
+    const period = value.match(periodRegex)[0];
 
     return (
       <Main>
@@ -78,10 +81,7 @@ export default class Time extends React.Component {
           items={minutes}
           selectedValue={minute}
         />
-        <PeriodButtons
-          onPeriodChange={this.handlePeriodChange}
-          mode={this.props.value.split(' ').pop()}
-        />
+        <PeriodButtons onPeriodChange={this.handlePeriodChange} mode={period} />
       </Main>
     );
   }

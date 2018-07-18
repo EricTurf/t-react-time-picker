@@ -31,3 +31,41 @@ export const Main = styled.div`
     border-color: transparent transparent rgb(35, 41, 45) transparent;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 30px;
+`;
+
+export const CancelButton = styled(Button)`
+  width: 50%;
+  color: white;
+  height: 100%;
+  border-bottom-left-radius: 6px;
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  font-family: 'Roboto', sans-serif;
+  &:hover {
+    background-color: rgb(60, 65, 65);
+  }
+`;
+
+CancelButton.defaultProps = {
+  label: 'Cancel',
+};
+
+export const ConfirmButton = styled(Button)`
+  width: 50%;
+  height: 100%;
+  color: white;
+  border-bottom-right-radius: 6px;
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  font-family: 'Roboto', sans-serif;
+  &:hover {
+    background-color: rgb(60, 65, 65);
+  }
+`;
+
+ConfirmButton.defaultProps = {
+  label: 'Confirm',
+};
