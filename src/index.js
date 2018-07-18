@@ -5,6 +5,7 @@ import { Time, Clock, Main, Value } from './index.styled';
 import { Popover } from './components/pop-over';
 
 import formatHour from './utils/format-hour';
+import formatMinute from './utils/format-minute';
 
 export default class TimePicker extends React.Component {
   state = { showPicker: false, time: null };
@@ -25,7 +26,7 @@ export default class TimePicker extends React.Component {
     const isAM = parseInt(hour) < 12;
     const period = isAM ? 'a.m' : 'p.m';
 
-    const time = `${formatHour(hour)}:${Math.ceil(minute / 5) * 5} ${period}`;
+    const time = `${formatHour(hour)}:${formatMinute(minute)} ${period}`;
 
     this.setState({ time });
   }
