@@ -63,8 +63,6 @@ export default class Time extends React.Component {
     const { value } = this.props;
     const { hours, minutes } = this.buildTimes();
 
-    console.log(value);
-
     const minute = value.match(minuteRegex)[0];
     const hour = value.match(hourRegex)[0];
     const period = value.match(periodRegex)[0];
