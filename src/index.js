@@ -9,7 +9,15 @@ import formatHour from './utils/format-hour';
 export default class TimePicker extends React.Component {
   state = { showPicker: false, time: null };
 
+  static defaultProps = {
+    onSelect: () => null,
+  };
+
   componentDidMount() {
+    const { value } = this.props;
+
+    if (value) return this.setState({ time: value });
+
     const today = new Date(Date.now()).toString();
 
     const currentTime = today.match(/([0-9]{1,2}\:[0-9]{2}(?=:))/g)[0];
