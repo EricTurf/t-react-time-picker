@@ -1,6 +1,6 @@
 {
   "name": "t-react-time-picker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple react time-picker",
   "main": "build/bundle.js",
   "scripts": {
