@@ -1,7 +1,16 @@
 import React from 'react';
+
+import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+
 import TimePicker from '../../src/index';
+
+const StyledPicker = styled(TimePicker)`
+  background-color: pink;
+  width: 600px;
+`;
+
 const getStateTimePicker = value =>
   class StateTimePicker extends React.Component {
     state = { value };
@@ -28,4 +37,5 @@ storiesOf('Time Picker', module)
     return <TimePicker onSelect={action('new time')} />;
   })
   .add('Initial value', () => <TimePicker value={'1:20 a.m'} />)
-  .add('wrong initial value', () => <TimePicker value="LUL" />);
+  .add('wrong initial value', () => <TimePicker value="LUL" />)
+  .add('styled picker', () => <StyledPicker />);

@@ -37,7 +37,7 @@ export default class TimePicker extends React.Component {
   submitTime = () => this.props.onSelect(this.state.time);
 
   render() {
-    const { value } = this.props;
+    const { value, className } = this.props;
     const { showPicker } = this.state;
     const timeRegex = /\d:\d\d\s[a|p].[m]/g;
 
@@ -47,7 +47,7 @@ export default class TimePicker extends React.Component {
       );
 
     return (
-      <Main>
+      <Main className={className}>
         <Time isOpen={showPicker} onClick={this.togglePicker}>
           <Value>{value || 'Click me to select a time'}</Value>
           <Clock />
