@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Time, Clock, Main } from './index.styled';
+import { Time, Clock, Main, Value } from './index.styled';
 
 import { Popover } from './components/pop-over';
 
@@ -34,7 +34,7 @@ export default class TimePicker extends React.Component {
 
   setTime = time => this.setState({ time });
 
-  onSelectHandler = () => this.props.onSelect(this.state.time);
+  submitTime = () => this.props.onSelect(this.state.time);
 
   render() {
     const { value } = this.props;
@@ -49,14 +49,14 @@ export default class TimePicker extends React.Component {
     return (
       <Main>
         <Time isOpen={showPicker} onClick={this.togglePicker}>
-          {value || 'Click me to select a time'}
+          <Value>{value || 'Click me to select a time'}</Value>
           <Clock />
         </Time>
         {showPicker && (
           <Popover
             onTimeChange={this.setTime}
-            onSelect={this.onSelectHandler}
-            value={value || '12:00 a.m'}
+            submitTime={this.submitTime}
+            // value={value}
             time={this.state.time}
             togglePicker={this.togglePicker}
           />
