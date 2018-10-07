@@ -59,12 +59,18 @@ export default class Time extends React.Component {
     return { hours, minutes };
   };
 
+  formatHour = hour => {
+    const normalizedHour = hour > 12 ? hour - 12 : hour
+
+    return normalizedHour < 10 ? `0${normalizedHour}` : normalizedHour
+  }
+
   render() {
     const { value } = this.props;
     const { hours, minutes } = this.buildTimes();
 
     const minute = value.match(minuteRegex)[0];
-    const hour = value.match(hourRegex)[0];
+    const hour = this.formatHour(value.match(hourRegex)[0]);
     const period = value.match(periodRegex)[0];
 
     return (
@@ -73,7 +79,7 @@ export default class Time extends React.Component {
         <ItemList
           items={hours}
           onClick={this.handleHourChange}
-          selectedValue={hour < 10 ? `0${hour}` : hour}
+          selectedValue={hour}
         />
         <Heading>Minutes</Heading>
         <ItemList
